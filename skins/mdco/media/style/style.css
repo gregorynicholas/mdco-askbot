@@ -227,16 +227,16 @@ blockquote {
 
 #ab-meta-nav {
   top: 0px;
-  right:0;
+  right: 7px;
   height: 20px;
-  padding: 3px;
+  padding: 3px 0 3px 3px;
   margin: 0;
 }
 
 #ab-meta-nav a {
   height: 35px;
   text-align: right;
-  margin-left: 20px;
+  margin-left: 10px;
   text-decoration: underline;
   color: #555;
 }
@@ -294,9 +294,9 @@ blockquote {
 
 #ab-main-nav a.on {
   line-height: 28px;
-  border: 1px solid #777;
+  border: 1px solid #2C5DB0;
   border-bottom: none;
-  background: #999;
+  background: #002461;
   color: #f7f7f7;
 }
 
@@ -310,7 +310,7 @@ blockquote {
 #searchBar {
   /*display:inline-block;*/
   background-color: #f7f7f7;
-  width:700px;
+  width:693px;
   padding: 7px;
 
   border: 1px solid #ccc;
@@ -330,7 +330,7 @@ blockquote {
 
 #searchBar .searchInput,
 #searchBar .searchInputCancelable {
-  width: 607px;
+  width: 600px;
 }
 
 #searchBar .searchInputCancelable {
@@ -608,10 +608,8 @@ ul#search-tags {
 
 .short-summary .counts .item-count {
   width:40px;
-  /*padding:0px 5px;*/
   font-size: 17px;
   font-weight: 800;
-
   border:1px solid #cccccc;
   border-radius: 5px;
   -moz-border-radius: 5px;
@@ -622,40 +620,29 @@ ul#search-tags {
   font-size: 11px;
   color: #777;
 }
-
 .short-summary .tags {
   margin-top: 0;
 }
 
-.no-votes .item-count {
-  background: rgb(249, 247, 235);
-  color: #a7a7a7;
-}
-.some-votes .item-count {
-  background: #a3d0ff;
-  color: #4a4a4a;
-}
+.no-views .item-count,
+.no-votes .item-count,
 .no-answers .item-count {
-  background: #b63333;
-  color: yellow;
+  background: #ececec;
+  color: #afafaf;
 }
-.some-answers .item-count {
-  background: rgb(249, 247, 235);
-  color: #a7a7a7;
-  border-color: #ffed9c;
-}
+
 .accepted .item-count {
-  background:#338333;
-  color:#d0f5a9;
+  background: #ccecb1;
+  color: #438509;
+  border-color: #438509;
 }
-.no-views .item-count {
-  background: gray;
-  color: #fff;
-}
-.some-views .item-count {
-  background: #ff8c8c;
-  background: #daedff;
+
+.some-views .item-count,
+.some-votes .item-count,
+.some-answers .item-count {
+  background: #fff;
   color: #4a4a4a;
+  border-color: #4a4a4a !important;
 }
 
 .short-summary .votes,
@@ -871,7 +858,7 @@ a:hover.medal {
   float: left;
   height: 24px;
   line-height: 24px;
-  margin-right:5px;
+  margin-right: 8px;
   padding: 0 7px;
   text-decoration: none;
   font-size: 12px;
@@ -884,6 +871,11 @@ a:hover.medal {
   background: #e7e7e7;
   color: #555;
   border: 1px solid #ccc;
+}
+
+.tabsA a.on,
+.tabsC a.on {
+  background: #fff;
 }
 
 .tabsA a.rev.on,
@@ -900,6 +892,10 @@ a:hover.medal {
   margin-right:5px;
   cursor: default;
   line-height: 30px;
+}
+
+.tabsA a:last-child {
+  margin-right: 0;
 }
 
 .tabsB a {
@@ -2212,19 +2208,21 @@ p.signup_p {
 }
 
 .search-result-summary {
-  font-weight: bold;
+  font-weight: normal;
   font-size:22px;
   margin:0 0 2px 0;
   padding:0;
   float: left;
   cursor: default;
+  color:#2C5DB0;
 }
 .search-tips {
   font-size:10px;
-  line-height:12px;
-  color: #aaa;
-  margin-bottom:8px;
+  line-height: 34px;
+  color: #2C5DB0;
   cursor: default;
+  display: inline-block;
+  float:right;
 }
 .search-tips a {
   text-decoration: underline;
