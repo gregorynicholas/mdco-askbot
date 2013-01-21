@@ -1,7 +1,6 @@
 ## Django settings for ASKBOT enabled project.
 from os import path
 import sys
-import askbot
 import secrets
 import logging
 
@@ -9,8 +8,9 @@ PROJECT_ROOT = path.dirname(__file__)
 
 # this line is added so that we can import pre-packaged askbot
 # dependencies..
-sys.path.append(path.join(
-  path.dirname(askbot.__file__), 'deps'))
+# import askbot
+# sys.path.append(path.join(
+#   path.dirname(askbot.__file__), 'deps'))
 
 # to debug Jinja2 templates set DEBUG=True and TEMPLATE_DEBUG=False.
 # it's strange, but this combination of settings makes the errors in templates
