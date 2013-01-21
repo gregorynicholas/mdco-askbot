@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- template base.html -->
 <html xmlns="http://www.w3.org/1999/xhtml">
     {% spaceless %}
     <head>
@@ -14,13 +13,11 @@
         {% if settings.GOOGLE_SITEMAP_CODE %}
         	<meta name="google-site-verification" content="{{settings.GOOGLE_SITEMAP_CODE}}" />
         {% endif %}
-        <!--http://ve.vppk7qgb.vesrv.com:8000/upfiles/medco-logo-16x16.png
-        <link rel="shortcut icon" href="{{ "/images/favicon.gif"|media }}" />-->
         <link rel="shortcut icon" href="{{ "/upfiles/medco-logo-16x16.png"|media }}" type="image/png" />
         <link href="{{"/style/style.css"|media }}" rel="stylesheet" type="text/css" />
         {{ skin.get_extra_css_link() }}
         {% if settings.USE_CUSTOM_CSS %}
-            <link 
+            <link
                 href="{% url "custom_css" %}?v={{settings.MEDIA_RESOURCE_REVISION}}"
                 rel="stylesheet"
                 type="text/css"
@@ -44,7 +41,7 @@
 	        </script>
         {% block forejs %}
         {% endblock %}
-        
+
 <script type="text/javascript">
   (function() {
     var license = '1057437',
@@ -87,4 +84,3 @@
         {% endblock %}
     </body>
 </html>
-<!-- end template base.html -->
