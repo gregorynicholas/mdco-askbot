@@ -40,8 +40,8 @@
     </div>
     <div class="clear"></div>
     <div style="margin-top:30px;"></div>
-    <fieldset 
-        id="openid-fs" 
+    <fieldset
+        id="openid-fs"
         {% if not login_form.openid_login_token.errors %}
             style="display:none;"
         {% endif %}>
@@ -51,6 +51,6 @@
         <p class="hint">{% trans %}(or select another login method above){% endtrans %}</p>
         <input type="text" name="openid_login_token" />
         <input class="submit" type="submit" name="openid_login_with_extra_token" value="sign in"/>
-    </fieldset> 
-    
+    </fieldset>
+
 {% endmacro %}

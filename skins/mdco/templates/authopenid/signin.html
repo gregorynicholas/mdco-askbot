@@ -13,25 +13,32 @@
 	{% endif %}
 	{% if answer %}
 	    <div class="message">
-	    {% trans title=answer.question.title, summary=answer.summary %}
-	    Your answer to {{title}} {{summary}} will be posted once you log in
-	    {% endtrans %}
+  	    {% trans title=answer.question.title, summary=answer.summary %}
+  	    Your answer to {{title}} {{summary}} will be posted once you log in
+  	    {% endtrans %}
 	    </div>
 	{% endif %}
 	{% if question %}
 	    <div class="message">
-	    {% trans title=question.title, summary=question.summary %}Your question 
-	    {{title}} {{summary}} will be posted once you log in
-	    {% endtrans %}
+  	    {% trans title=question.title, summary=question.summary %}Your question
+  	    {{title}} {{summary}} will be posted once you log in
+  	    {% endtrans %}
 	    </div>
 	{% endif %}
   <p id='login-intro'>
-  {% if view_subtype == 'email_sent' %}
-      {% trans %}Please check your email and visit the enclosed link to re-connect to your account{% endtrans %}
-  {% endif %}
+    {% if view_subtype == 'email_sent' %}
+        {% trans %}Please check your email and visit the enclosed link to re-connect to your account{% endtrans %}
+    {% else %}
+      {% if not question %}
+        <div class="tabBar-spacer"></div>
+      {% endif %}
+      <h1>Login</h1>
+    {% endif %}
   </p>
   {% if openid_error_message %}
-      <p class="warning">{{ openid_error_message }}</p>
+      <div class="message error">
+        <p class="warning">{{ openid_error_message }}</p>
+      </div>
   {% endif %}
   {% if view_subtype != 'email_sent' and view_subtype != 'bad_key' %}
 
@@ -40,23 +47,27 @@
     {{ login_form.next }}
     {#{ login_form.login_provider_name }#}
     {% if login_form.password_login_failed %}
-        <p class="error">{% trans %}Login failed, please try again{% endtrans %}</p>
+        <div class="message error">
+          <p class="error">
+            {% trans %}Login failed, please try again{% endtrans %}
+          </p>
+        </div>
     {% endif %}
     <input type="hidden" name="password_action" value="login" />
     <input type="hidden" name="login_provider_name" value="local" />
     <input type="hidden" name="this_is_the_login_form" value="1" />
-    <div class="form-row"> <label for="id_username" class="required">Username:</label> 
+    <div class="form-row"> <label for="id_username" class="required">Username:</label>
     {#{login_form.username}#}
-    <input id="id_username" type="text" name="username" maxlength="30" /> </div> 
-    <div class="form-row"> <label for="id_password" class="required">Password:</label> 
+    <input id="id_username" type="text" name="username" maxlength="30" /> </div>
+    <div class="form-row"> <label for="id_password" class="required">Password:</label>
     {#{login_form.password}#}
-    <input type="password" name="password" id="id_password" /> </div> 
+    <input type="password" name="password" id="id_password" /> </div>
     <div class="submit-row">
-    	<label>&nbsp;</label><input type="submit" value="Log in" />
+    	<input class="submit-btn" type="submit" value="Log in" />
     	<a class="create-password-account" style="margin-left:30px; vertical-align:middle" href="{% url user_signup_with_password %}?login_provider=local">create an account</a>
     </div>
-    
-    {{ 
+
+    {{
         login_macros.provider_buttons(
             login_form = login_form,
             major_login_providers = major_login_providers,
@@ -66,10 +77,10 @@
         )
     }}
   </form>
-  
+
   <form id="signin-form" method="post" action="{{ settings.LOGIN_URL }}">
       {% if use_password_login==True %}
-      {#<fieldset 
+      {#<fieldset
           id="password-fs"
           {% if user.is_anonymous() %}
               {% if not login_form.username.errors and not login_form.password_login_failed %}
@@ -133,7 +144,7 @@
       {% endif %}
   </form>
   {% if user.is_authenticated() and existing_login_methods and settings.ALLOW_ADD_REMOVE_LOGIN_METHODS %}
-	  {#<div 
+	  {#<div
 	      id='existing-login-methods'
 	      {% if login_form.password_change_failed %}
 	          style="display:none";

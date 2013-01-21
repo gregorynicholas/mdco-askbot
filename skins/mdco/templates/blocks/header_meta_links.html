@@ -1,5 +1,5 @@
 {% if request.user.is_authenticated() %}
-    <a href="{{ request.user.get_absolute_url() }}">{{ request.user.username }}</a> 
+    <a href="{{ request.user.get_absolute_url() }}">{{ request.user.username }}</a>
     <span class="user-info">
 	    {{ macros.inbox_link(request.user) }}
 	    {{ macros.moderation_items_link(request.user, moderation_items) }}
@@ -9,7 +9,7 @@
 {% else %}
     <a href="{{ settings.LOGIN_URL }}">sign in</a>
     {% if settings.USE_LDAP_FOR_PASSWORD_LOGIN == False %}
-    	<a class="create-password-account" 
+    	<a class="create-password-account"
     		 href="{% url user_signup_with_password %}?login_provider=local">
     		 	create an account
 		 	</a>
