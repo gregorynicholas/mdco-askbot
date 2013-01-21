@@ -1,0 +1,95 @@
+{% extends "two_column_body.html" %}
+{% import "macros.html" as macros %}
+<!-- template ask.html -->
+{% block title %}Ask a question{% endblock %}
+
+{% block forestyle %}
+    <link rel="stylesheet" type="text/css" href="{{"/js/wmd/wmd.css"|media}}" />
+{% endblock %}
+
+{# main contents of ask form is in the template input_bar #}
+
+{% block sidebar %}
+	{% include "blocks/question_edit_tips.html" %}
+{% endblock %}
+
+{% block endjs %}
+  <script type='text/javascript' src='{{"/js/editor.js"|media}}'></script>
+  <script type='text/javascript' src='{{"/js/jquery.validate.js"|media}}'></script>
+  <script type='text/javascript' src='{{"/js/post.js"|media}}'></script>
+  <script type='text/javascript' src='{{"/js/wmd/showdown.js"|media}}'></script>
+  <script type='text/javascript' src='{{"/js/wmd/wmd.js"|media}}'></script>
+  <script type='text/javascript'>
+      var sortMethod = undefined;//need for live_search
+      var minSearchWordLength = {{settings.MIN_SEARCH_WORD_LENGTH}};
+  </script>
+  <script type='text/javascript' src='{{"/js/live_search.js"|media}}'></script>
+  
+  {% include "blocks/editor_data.html" %}
+  
+  <script type='text/javascript'>
+      askbot['urls']['api_get_questions'] = '{% url api_get_questions %}';
+      {% if settings.ENABLE_MATHJAX or settings.MARKUP_CODE_FRIENDLY %}
+          var codeFriendlyMarkdown = true;
+      {% else %}
+          var codeFriendlyMarkdown = false;
+      {% endif %}
+      $().ready(function(){
+          liveSearch().init('ask_page');
+          
+          //toggle text editor
+          var editor_loaded = false;
+          var text_display = false;
+          var text_txt = "add more description";
+          $('#text-collapse').text(text_txt);
+          $('#text-collapse').bind('click', function(e){
+          	e.preventDefault();
+            text_txt = text_display ? "add more description" : "hide more description";
+            text_display = !text_display;
+            $('#text-field').toggle();
+            $('#text-collapse').text(text_txt);
+            if (!editor_loaded) {
+	            //set current module button style
+	            $('#editor').TextAreaResizer();
+	            //highlight code synctax when editor has new text
+	            $("#editor").typeWatch({
+	            	highlight: false, 
+	            	wait: 3000,
+	            	captureLength: 5, 
+	            	callback: lanai.highlightSyntax
+	          	});
+	          	editor_loaded = true;
+            }
+          });
+          
+          //toggle preview of editor
+          var display = false;
+          var txt = "show preview";
+          $('#pre-collapse').text(txt);
+          $('#pre-collapse').bind('click', function(e){
+          	e.preventDefault();
+              txt = display ? "show preview" : "hide preview";
+              display = !display;
+              $('#previewer').toggle();
+              $('#pre-collapse').text(txt);
+          });
+          
+          //toggle tags
+          var tag_display = false;
+          var tag_txt = "add search tags";
+          $('#tags-collapse').text(tag_txt);
+          $('#tags-collapse').bind('click', function(e){
+          	e.preventDefault();
+              tag_txt = tag_display ? "add search tags" : "hide search tags";
+              tag_display = !tag_display;
+              $('#tag-field').toggle();
+              $('#tags-collapse').text(tag_txt);
+          });
+          
+          //tags autocomplete
+          {{ macros.tag_autocomplete_js(id = '#id_tags') }}
+          setupFormValidation($("#fmask"), CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
+          lanai.highlightSyntax();
+      });
+  </script>
+{% endblock %}<!-- end template ask.html -->

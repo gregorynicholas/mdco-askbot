@@ -1,0 +1,13 @@
+{% extends "two_column_body.html" %}
+<!-- template about.html -->
+{% block title %}About {{settings.APP_SHORT_NAME}}{% endblock %}
+{% block content %}
+<div class="tabBar-spacer"></div>
+<h1>
+	About {{settings.APP_SHORT_NAME}}
+</h1>
+<div class="tabBar-spacer"></div>
+<div class="content">
+    {{settings.FORUM_ABOUT}}
+</div>
+{% endblock %} <!-- end template about.html -->
