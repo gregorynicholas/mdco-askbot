@@ -11,7 +11,7 @@
 </h1>
 <div id="main-body" class="ask-body">
     <form id="fmedit" action="{% url edit_answer answer.id %}" method="post" >{% csrf_token %}
-        <label for="id_revision" ><strong>{% trans %}revision{% endtrans %}:</strong></label> <br/> 
+        <label for="id_revision" ><strong>{% trans %}revision{% endtrans %}:</strong></label> <br/>
         {% if revision_form.revision.errors %}{{ revision_form.revision.errors.as_ul() }}{% endif %}
         <div style="vertical-align:middle">
         {{ revision_form.revision }} <input type="submit" style="display:none" id="select_revision" name="select_revision" value="{% trans %}select revision{% endtrans %}">
@@ -50,30 +50,30 @@
         $().ready(function(){
             $("#nav_questions").attr('className',"on");
             $('#editor').TextAreaResizer();
-            
+
             //highlight code synctax when editor has new text
             $("#editor").typeWatch({highlight: false, wait: 3000,
                              captureLength: 5, callback: lanai.highlightSyntax});
-                             
+
             //toggle preview of editor
             var display = false;
             var txt = "{% trans %}show preview{% endtrans %}";
-            $('#pre-collapse').text(txt);
-            $('#pre-collapse').bind('click', function(){
-                txt = display ? "{% trans %}show preview{% endtrans %}" : "{% trans %}hide preview{% endtrans %}";
-                display = !display;
-                $('#previewer').toggle();
-                $('#pre-collapse').text(txt);
-            });
+            // $('#pre-collapse').text(txt);
+            // $('#pre-collapse').bind('click', function(){
+            //     txt = display ? "{% trans %}show preview{% endtrans %}" : "{% trans %}hide preview{% endtrans %}";
+            //     display = !display;
+            //     $('#previewer').toggle();
+            //     $('#pre-collapse').text(txt);
+            // });
 
             setupFormValidation($("#fmedit"), CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
-            
+
             $('#id_revision').unbind().change(function(){
                 $("#select_revision").click();
             });
-            
+
             lanai.highlightSyntax();
-            
+
         });
     </script>
 {% endblock %}

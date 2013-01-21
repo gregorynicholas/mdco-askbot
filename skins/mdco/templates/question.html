@@ -28,36 +28,36 @@
         <td style="width:35px; vertical-align:top">
             <div class="vote-buttons">
                 {% if question_vote %}
-	                <img id="question-img-upvote-{{ question.id }}" class="question-img-upvote" 
+	                <img id="question-img-upvote-{{ question.id }}" class="question-img-upvote"
 	                    {% if question_vote.is_upvote() %}
-	                        src="{{"/images/vote-arrow-up-on.png"|media}}" 
+	                        src="{{"/images/vote-arrow-up-on.png"|media}}"
 	                    {% else %}
-	                        src="{{"/images/vote-arrow-up.png"|media}}" 
+	                        src="{{"/images/vote-arrow-up.png"|media}}"
 	                    {% endif %}
 	                    alt="{% trans %}i like this post (click again to cancel){% endtrans %}"
 	                    title="{% trans %}i like this post (click again to cancel){% endtrans %}" />
-	                <div id="question-vote-number-{{ question.id }}" class="vote-number" 
+	                <div id="question-vote-number-{{ question.id }}" class="vote-number"
 	                    title="{% trans %}current number of votes{% endtrans %}">
 	                    {{ question.score }}
 	                </div>
-	                <img id="question-img-downvote-{{ question.id }}" class="question-img-downvote" 
+	                <img id="question-img-downvote-{{ question.id }}" class="question-img-downvote"
 	                    {% if question_vote.is_downvote() %}
-	                        src="{{"/images/vote-arrow-down-on.png"|media}}" 
+	                        src="{{"/images/vote-arrow-down-on.png"|media}}"
 	                    {% else %}
-	                        src="{{"/images/vote-arrow-down.png"|media}}" 
+	                        src="{{"/images/vote-arrow-down.png"|media}}"
 	                    {% endif %}
 	                    alt="{% trans %}i dont like this post (click again to cancel){% endtrans %}"
 	                    title="{% trans %}i dont like this post (click again to cancel){% endtrans %}" />
                 {% else %}
-	                <img id="question-img-upvote-{{ question.id }}" class="question-img-upvote" 
+	                <img id="question-img-upvote-{{ question.id }}" class="question-img-upvote"
 	                    alt="{% trans %}i like this post (click again to cancel){% endtrans %}"
-	                    src="{{"/images/vote-arrow-up.png"|media}}" 
+	                    src="{{"/images/vote-arrow-up.png"|media}}"
 	                    title="{% trans %}i like this post (click again to cancel){% endtrans %}" />
-	                <div id="question-vote-number-{{ question.id }}" class="vote-number" 
+	                <div id="question-vote-number-{{ question.id }}" class="vote-number"
 	                    title="{% trans %}current number of votes{% endtrans %}">
 	                    {{ question.score }}
 	                </div>
-	                <img id="question-img-downvote-{{ question.id }}" class="question-img-downvote" 
+	                <img id="question-img-downvote-{{ question.id }}" class="question-img-downvote"
 	                    src="{{"/images/vote-arrow-down.png"|media}}"
 	                    alt="{% trans %}i dont like this post (click again to cancel){% endtrans %}"
 	                    title="{% trans %}i dont like this post (click again to cancel){% endtrans %}" />
@@ -89,7 +89,7 @@
               {{question.html}}
             </div>
             <div class="post-update-info-container" style="float:right; width:150px;">
-                {{ 
+                {{
                     macros.post_contributor_info(
                         question,
                         "original_author",
@@ -97,7 +97,7 @@
                         settings.MIN_REP_TO_EDIT_WIKI
                     )
                 }}
-                {#% {{ 
+                {#% {{
                     macros.post_contributor_info(
                         question,
                         "last_updater",
@@ -142,7 +142,7 @@
                 {% endif %}
                 {% if request.user|can_flag_offensive(question) %}{{ pipe() }}
                 <span id="question-offensive-flag-{{ question.id }}"
-                		  class="offensive-flag" 
+                		  class="offensive-flag"
                     	title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}">
                     <a>{% trans %}flag offensive{% endtrans %}</a>
                     {% if request.user|can_see_offensive_flags(question) %}
@@ -177,8 +177,8 @@
 		<h3>
 			{% trans close_reason=question.get_close_reason_display() %}
 				The question has been closed for the following reason "{{ close_reason }}" by
-			{% endtrans %} 
-			<a href="{{ question.closed_by.get_profile_url() }}">{{ question.closed_by.username }}</a> 
+			{% endtrans %}
+			<a href="{{ question.closed_by.get_profile_url() }}">{{ question.closed_by.username }}</a>
 			closed at {{question.closed_at}}
 		</h3>
 	</div>
@@ -193,70 +193,70 @@
         {% endtrans %}
         </h2>
         <div class="tabsA">
-            <a id="oldest" 
-            	 href="{{ question.get_absolute_url() }}?sort=oldest#sort-top" 
+            <a id="oldest"
+            	 href="{{ question.get_absolute_url() }}?sort=oldest#sort-top"
                title="{% trans %}oldest answers will be shown first{% endtrans %}">
             	<span>{% trans %}oldest answers{% endtrans %}</span>
           	</a>
-            <a id="latest" 
-            	 href="{{ question.get_absolute_url() }}?sort=latest#sort-top" 
+            <a id="latest"
+            	 href="{{ question.get_absolute_url() }}?sort=latest#sort-top"
                title="{% trans %}newest answers will be shown first{% endtrans %}">
             	<span>{% trans %}newest answers{% endtrans %}</span>
           	</a>
             <a id="votes"
-            	 href="{{ question.get_absolute_url() }}?sort=votes#sort-top" 
+            	 href="{{ question.get_absolute_url() }}?sort=votes#sort-top"
                title="{% trans %}most voted answers will be shown first{% endtrans %}">
             	<span>{% trans %}popular answers{% endtrans %}</span>
-          	</a>   
+          	</a>
         </div>
     </div>
     <div class="clear"></div>
-    
+
     {{ macros.paginator(paginator_context) }}
 
     {% for answer in answers %}
         <a name="{{ answer.id }}"></a>
-        <div 
-        	id="answer-container-{{ answer.id }}" 
-        	class="answer 
-        				{% if answer.accepted %}accepted-answer{% endif %} 
-        				{% if answer.author_id==question.author_id %} answered-by-owner{% endif %} 
+        <div
+        	id="answer-container-{{ answer.id }}"
+        	class="answer
+        				{% if answer.accepted %}accepted-answer{% endif %}
+        				{% if answer.author_id==question.author_id %} answered-by-owner{% endif %}
         				{% if answer.deleted %}deleted{% endif %}">
             <table style="width:100%;" class="answer-table">
                 <tr>
                     <td style="width:32px; vertical-align:top">
                         <div class="vote-buttons">
-                            <img id="answer-img-upvote-{{ answer.id }}" class="answer-img-upvote" 
+                            <img id="answer-img-upvote-{{ answer.id }}" class="answer-img-upvote"
                                 {% if user_answer_votes[answer.id] == 1 %}
-                                    src="{{"/images/vote-arrow-up-on.png"|media}}" 
+                                    src="{{"/images/vote-arrow-up-on.png"|media}}"
                                 {% else %}
-                                    src="{{"/images/vote-arrow-up.png"|media}}" 
+                                    src="{{"/images/vote-arrow-up.png"|media}}"
                                 {% endif %}
                                 alt="{% trans %}i like this answer (click again to cancel){% endtrans %}"
                                 title="{% trans %}i like this answer (click again to cancel){% endtrans %}"/>
                             <div id="answer-vote-number-{{ answer.id }}" class="vote-number" title="{% trans %}current number of votes{% endtrans %}">
                                 {{ answer.score }}
                             </div>
-                            <img id="answer-img-downvote-{{ answer.id }}" class="answer-img-downvote" 
+                            <img id="answer-img-downvote-{{ answer.id }}" class="answer-img-downvote"
                                 {% if user_answer_votes[answer.id] == -1 %}
-                                    src="{{"/images/vote-arrow-down-on.png"|media}}" 
+                                    src="{{"/images/vote-arrow-down-on.png"|media}}"
                                 {% else %}
-                                    src="{{"/images/vote-arrow-down.png"|media}}" 
+                                    src="{{"/images/vote-arrow-down.png"|media}}"
                                 {% endif %}
                                 alt="{% trans %}i dont like this answer (click again to cancel){% endtrans %}"
                                 title="{% trans %}i dont like this answer (click again to cancel){% endtrans %}" />
                             {% if request.user == question.author %}
-                            <img id="answer-img-accept-{{ answer.id }}" class="answer-img-accept" 
+                            <img id="answer-img-accept-{{ answer.id }}" class="answer-img-accept"
                                 {% if answer.accepted %}
                                     src="{{"/images/vote-accepted-on.png"|media}}"
                                 {% else %}
-                                    src="{{"/images/vote-accepted.png"|media}}" 
+                                    src="{{"/images/vote-accepted.png"|media}}"
                                 {% endif %}
                                 alt="{% trans %}mark this answer as favorite (click again to undo){% endtrans %}"
                                 title="{% trans %}mark this answer as favorite (click again to undo){% endtrans %}" />
                             {% else %}
                                 {% if answer.accepted %}
-                                <img id="answer-img-accept-{{ answer.id }}" class="answer-img-accept" 
+                                <img id="answer-img-accept-{{ answer.id }}" class="answer-img-accept"
                                     {% if answer.accepted %}
                                         src="{{"/images/vote-accepted-on.png"|media}}"
                                     {% else %}
@@ -282,7 +282,7 @@
                                             settings.MIN_REP_TO_EDIT_WIKI
                                         )
                                     }}
-                                    {{ 
+                                    {{
                                         macros.post_contributor_info(
                                             answer,
                                             "last_updater",
@@ -296,8 +296,8 @@
                             <div class="answer-controls post-controls">
                                 {% set pipe=joiner('<span class="sep">|</span>') %}
                                 <span class="linksopt">{{ pipe() }}
-                                    <a 
-                                        href="{{ answer.get_absolute_url() }}" 
+                                    <a
+                                        href="{{ answer.get_absolute_url() }}"
                                         title="{% trans %}answer permanent link{% endtrans %}">
                                         {% trans %}permanent link{% endtrans %}
                                     </a>
@@ -306,7 +306,7 @@
                                 <span class="action-link"><a href="{% url edit_answer answer.id %}">edit</a></span>
                                 {% endif %}
                                 {% if request.user|can_flag_offensive(answer) %}{{ pipe() }}
-                                <span id="answer-offensive-flag-{{ answer.id }}" class="offensive-flag" 
+                                <span id="answer-offensive-flag-{{ answer.id }}" class="offensive-flag"
                                     title="{% trans %}report as offensive (i.e containing spam, advertising, malicious text, etc.){% endtrans %}">
                                     <a>{% trans %}flag offensive{% endtrans %}</a>
                                     {% if request.user|can_see_offensive_flags(answer) %}
@@ -344,14 +344,14 @@
             </table>
         </div>
     {% endfor %}
-    
+
     <div class="clear"></div>
     {{ macros.paginator(paginator_context) }}
 {% endif %}
 <form id="fmanswer" action="{% url answer question.id %}" method="post">{% csrf_token %}
     {% if request.user.is_authenticated() %}
         <div style="font-size:11px; color:#777;">
-	        {{ answer.email_notify }} 
+	        {{ answer.email_notify }}
 	        <label for="question-subscribe-updates" style="font-size:11px; color:#777;">
 			        {% set email_feed_frequency = request.user.get_followed_question_alert_frequency() %}
 			        {% if email_feed_frequency =='n' %}
@@ -372,9 +372,9 @@
             <label>{% trans %}once you sign in you will be able to subscribe for any updates here{% endtrans %}</label>
         </p>
     {% endif %}
-    
+
     <div class="clear"></div>
-    
+
     {% if request.user.is_anonymous() and settings.ALLOW_POSTING_BEFORE_LOGGING_IN == False %}
         {% if not question.closed %}
             <a class="submit" href="{{settings.LOGIN_URL}}?next={% url question question.id %}">
@@ -406,22 +406,22 @@
                 </div>
             {% endif %}
             {{ macros.edit_post(answer) }}
-            <input type="submit" 
+            <input type="submit"
                 {% if user.is_anonymous() %}
-                    value="{% trans %}Login/Signup to Post Your Answer{% endtrans %}" 
+                    value="{% trans %}Login/Signup to Post Your Answer{% endtrans %}"
                 {% else %}
                     {% if user == question.author %}
-                        value="{% trans %}submit answer{% endtrans %}" 
+                        value="{% trans %}submit answer{% endtrans %}"
                     {% else %}
-                        value="{% trans %}submit answer{% endtrans %}" 
+                        value="{% trans %}submit answer{% endtrans %}"
                     {% endif %}
                 {% endif %}
                 class="submit after-editor" style="float:left"/>
-                
+
                 {% if settings.WIKI_ON %}
                   {{ macros.checkbox_in_div(answer.wiki) }}
                 {% endif %}
-                
+
         {% endif %}
     {% endif %}
     </form>
@@ -448,10 +448,10 @@
         {% endfor %}
     </ul>
     <div class="clear"></div> %#}
-    
-    
+
+
     <div class="post-update-info-container">
-            {{ 
+            {{
                 macros.post_contributor_info(
                                 question,
                                 "original_author",
@@ -459,30 +459,30 @@
                                 settings.MIN_REP_TO_EDIT_WIKI
                             )
             }}
-           {{ 
+           {{
               macros.post_contributor_info(
                               question,
                               "last_updater",
                               question.wiki,
                               settings.MIN_REP_TO_EDIT_WIKI,
                           )
-          }} 
-    </div> 
-		<div class="clear"></div> 
-    
+          }}
+    </div>
+		<div class="clear"></div>
+
     <!--<p>
-        {% trans %}question asked{% endtrans %}: 
+        {% trans %}question asked{% endtrans %}:
         <strong title="{{ question.added_at }}">{{question.added_at|diff_date}}</strong>
     </p>
-    <p> 
-        {% trans %}question was seen{% endtrans %}: 
+    <p>
+        {% trans %}question was seen{% endtrans %}:
         <strong>{{ question.view_count|intcomma }} {% trans %}times{% endtrans %}</strong>
     </p>
     <p>
-        {% trans %}last updated{% endtrans %}: 
+        {% trans %}last updated{% endtrans %}:
         <strong title="{{ question.last_activity_at }}">{{question.last_activity_at|diff_date}}</strong>
     </p>-->
-    
+
 </div>
 {% endcache %}
 {% if similar_questions.data %}
@@ -539,33 +539,34 @@
             $("#nav_questions").attr('className',"on");
             var answer_sort_tab = "{{ tab_id }}";
             $("#" + answer_sort_tab).attr('className',"on");
-            
+
             Vote.init({{ question.id }}, '{{ question.title|slugify }}', '{{ question.author.id }}','{{ request.user.id }}');
-            
+
             {% if not question.closed and request.user.is_authenticated %}initEditor();{% endif %}
-            
+
             lanai.highlightSyntax();
             $('#btLogin').bind('click', function(){window.location.href='{{ settings.LOGIN_URL }}'; } )
             if (window.location.hash === 'fmanswer'){
                 $('#fmanswer textarea').focus();
             }
         });
-        
+
         function initEditor(){
             $('#editor').TextAreaResizer();
             //highlight code synctax when editor has new text
             $("#editor").typeWatch({highlight: false, wait: 3000,
                              captureLength: 5, callback: lanai.highlightSyntax});
-                             
-            var display = true;
-            var txt = "[{% trans %}hide preview{% endtrans %}]";
-            $('#pre-collapse').text(txt);
-            $('#pre-collapse').bind('click', function(){
-                txt = display ? "[{% trans %}show preview{% endtrans %}]" : "[{% trans %}hide preview{% endtrans %}]";
-                display = !display;
-                $('#previewer').toggle();
-                $('#pre-collapse').text(txt);
-            });
+
+            var display = false;
+            // var txt = "[{% trans %}hide preview{% endtrans %}]";
+            // $('#pre-collapse').text(txt);
+            // $('#pre-collapse').bind('click', function(){
+            //     txt = display ? "[{% trans %}show preview{% endtrans %}]" : "[{% trans %}hide preview{% endtrans %}]";
+            //     display = !display;
+            //     $('#previewer').toggle();
+            //     $('#pre-collapse').text(txt);
+            // });
+
             setupFormValidation($("#fmanswer"), CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
         }
     </script>

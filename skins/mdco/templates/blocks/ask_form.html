@@ -7,15 +7,15 @@
             {% else %}
                 {% if settings.EMAIL_VALIDATION %}
                     {% if not request.user.email_isvalid %}
-                            {% trans email=request.user.email %}must have valid {{email}} to post, 
+                            {% trans email=request.user.email %}must have valid {{email}} to post,
                             see {{email_validation_faq_url}}
                             {% endtrans %}
                     {% endif %}
                 {% endif %}
             {% endif %}
-            <input id="id_title" 
-            			 class="questionTitleInput" 
-            			 name="title" 
+            <input id="id_title"
+            			 class="questionTitleInput"
+            			 name="title"
             			 autocomplete="off"
                 	 value="{% if form.initial.title %}{{form.initial.title}}{% endif %}"/>
             <span class="form-error">{{ form.title.errors }}</span>
@@ -26,13 +26,12 @@
     </div>
     <div id='question-list'></div>
     {{macros.edit_post(form, post_type='question', edit_title=False)}}
-    
     {% if not request.user.is_authenticated() %}
-    	<input type="submit" name="post_anon" value="login/signup to post" class="submit" />
+    	<input type="submit" name="post_anon" value="post question" class="submit" />
     {% else %}
-    	<input type="submit" name="post" value="submit question" class="submit" />
+    	<input type="submit" name="post" value="post question" class="submit" />
     {% endif %}
-    
+
     <div class="clear"></div>
     <div class="question-options">
         {% if settings.WIKI_ON %}
@@ -42,7 +41,7 @@
             {{ macros.checkbox_in_div(form.ask_anonymously) }}
         {% endif %}
     </div>
-    
+
     <div style="height:30px;"></div>
   {#<div class="boxC">
     <h3>question tips</h3>

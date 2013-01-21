@@ -24,9 +24,9 @@
       var minSearchWordLength = {{settings.MIN_SEARCH_WORD_LENGTH}};
   </script>
   <script type='text/javascript' src='{{"/js/live_search.js"|media}}'></script>
-  
+
   {% include "blocks/editor_data.html" %}
-  
+
   <script type='text/javascript'>
       askbot['urls']['api_get_questions'] = '{% url api_get_questions %}';
       {% if settings.ENABLE_MATHJAX or settings.MARKUP_CODE_FRIENDLY %}
@@ -36,7 +36,7 @@
       {% endif %}
       $().ready(function(){
           liveSearch().init('ask_page');
-          
+
           //toggle text editor
           var editor_loaded = false;
           var text_display = false;
@@ -53,27 +53,27 @@
 	            $('#editor').TextAreaResizer();
 	            //highlight code synctax when editor has new text
 	            $("#editor").typeWatch({
-	            	highlight: false, 
+	            	highlight: false,
 	            	wait: 3000,
-	            	captureLength: 5, 
+	            	captureLength: 5,
 	            	callback: lanai.highlightSyntax
 	          	});
 	          	editor_loaded = true;
             }
           });
-          
+
           //toggle preview of editor
           var display = false;
-          var txt = "show preview";
-          $('#pre-collapse').text(txt);
-          $('#pre-collapse').bind('click', function(e){
-          	e.preventDefault();
-              txt = display ? "show preview" : "hide preview";
-              display = !display;
-              $('#previewer').toggle();
-              $('#pre-collapse').text(txt);
-          });
-          
+          // var txt = "show preview";
+          // $('#pre-collapse').text(txt);
+          // $('#pre-collapse').bind('click', function(e){
+          // 	e.preventDefault();
+          //     txt = display ? "show preview" : "hide preview";
+          //     display = !display;
+          //     $('#previewer').toggle();
+          //     $('#pre-collapse').text(txt);
+          // });
+
           //toggle tags
           var tag_display = false;
           var tag_txt = "add search tags";
@@ -85,7 +85,7 @@
               $('#tag-field').toggle();
               $('#tags-collapse').text(tag_txt);
           });
-          
+
           //tags autocomplete
           {{ macros.tag_autocomplete_js(id = '#id_tags') }}
           setupFormValidation($("#fmask"), CPValidator.getQuestionFormRules(), CPValidator.getQuestionFormMessages());
