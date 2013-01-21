@@ -5,6 +5,8 @@ import askbot
 import secrets
 import logging
 
+PROJECT_ROOT = path.dirname(__file__)
+
 # this line is added so that we can import pre-packaged askbot
 # dependencies..
 sys.path.append(path.join(
@@ -85,7 +87,6 @@ SITE_ID = secrets.site_id
 USE_I18N = True
 LANGUAGE_CODE = 'en'
 
-PROJECT_ROOT = path.dirname(__file__)
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 ASKBOT_FILE_UPLOAD_DIR = path.join(
