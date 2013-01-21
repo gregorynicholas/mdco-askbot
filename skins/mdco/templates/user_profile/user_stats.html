@@ -1,0 +1,158 @@
+{% extends "user_profile/user_info.html" %}
+{% import "macros.html" as macros %}
+<!-- user_stats.html -->
+
+{% block userstatstable %}
+  
+  <style type="text/css">
+  	.user-stats-table {
+  		width: 530px;
+		  overflow: hidden;
+  	}
+  	.user-stats-table .item-left {
+			color: #444;
+		  border-top:solid 1px #f0f0f0;
+		  border-bottom:solid 1px #f9f9f9;
+		  padding:10px 10px;
+		  white-space: nowrap;
+		}
+		.user-stats-table .item-right {
+			color: #666;
+		  border-top:solid 1px #f0f0f0;
+		  border-bottom:solid 1px #f9f9f9;
+		  padding:10px 10px;
+		  width: 400px;
+		  overflow: hidden;
+		}
+  </style>
+  
+  <table class="user-stats-table">
+	    <tr>
+        <td class="item-left" >
+				  <a name="questions"></a>
+			  	{% trans counter=questions|length %}
+			  	{{counter}} Question{% pluralize %}{{counter}} Questions
+			  	{% endtrans %}
+			</td>
+			<td class="item-right">
+				{% include "user_profile/users_questions.html" %}
+			</td>
+	  </tr>
+	
+  
+  	<tr>
+        <td class="item-left" >
+				  <a name="answers"></a>
+				  	{% trans counter=answered_questions|length %}
+				  	{{counter}} Answer{% pluralize %}{{counter}} Answers
+				  	{% endtrans %}
+			</td>
+			<td class="item-right">
+	      {% for answered_question in answered_questions %}
+	      <div class="answer-summary">
+	          <a title="{{answered_question.summary|collapse}}" 
+	              href="{% url question answered_question.id %}{{answered_question.title|slugify}}#{{answered_question.answer_id}}">
+	              <span class="answer-votes {% if answered_question.accepted %}answered-accepted{% endif %}" 
+	                    title="the answer has been voted for {{ answered_question.answer_score }} times {% if answered_question.accepted %}this answer has been selected as correct{%endif%}">
+	                  {{ answered_question.answer_score }}
+	              </span>
+	          </a>
+	          <div class="answer-link">
+	              {% spaceless %}
+	              <a href="{% url question answered_question.id %}{{answered_question.title|slugify}}#{{answered_question.answer_id}}">{{answered_question.title}}</a> 
+	              {% endspaceless %}
+	              {% if answered_question.comment_count %}
+	              <span>
+	                  (the answer has been commented {{answered_question.comment_count}} times)
+	              </span> 
+	              {% endif %}
+	          </div>
+	      </div>
+	      {% endfor %}
+			</td>
+	  </tr>
+  
+  
+  	<tr>
+        <td class="item-left" >
+				  <a name="votes"></a>
+			  	{% trans counter=total_votes %}
+			  	{{counter}} Vote{% pluralize %}{{counter}} Votes
+			  	{% endtrans %}
+			</td>
+			<td class="item-right">
+      <table>
+          <tr>
+              <td width="60">
+                  <img style="vertical-align:middle;" src="{{"/images/vote-arrow-up-on.png"|media}}" alt="{% trans %}thumb up{% endtrans %}" />
+                  <span title="{% trans %}user has voted up this many times{% endtrans %}">{{up_votes}}</span>
+              </td>
+              <td width="60">
+                  <img style="vertical-align:middle;" src="{{"/images/vote-arrow-down-on.png"|media}}" alt="{% trans %}thumb down{% endtrans %}" />
+                  <span title="{% trans %}user voted down this many times{% endtrans %}">{{down_votes}}</span>
+              </td>
+          </tr>
+      </table>
+			</td>
+	  </tr>
+  
+  	<tr>
+        <td class="item-left" >
+				  <a name="tags"></a>
+			  	{% trans counter=user_tags|length %}
+			  	{{counter}} Tag{% pluralize %}{{counter}} Tags
+			  	{% endtrans %}
+			</td>
+			<td class="item-right">
+          <ul id="ab-user-tags" class="tags">
+          	{% for tag in user_tags %}
+              <li style="float:left; margin-bottom:10px;">
+              {{ macros.tag_widget(
+                  tag.name,
+                  html_tag = 'div',
+                  url_params = 
+                      "author=" ~ view_user.id ~
+                      "&start_over=true",
+                  extra_content = 
+                      '<span class="tag-number">&#215; ' ~
+                      tag.user_tag_usage_count|intcomma ~
+                      '</span>'
+                 )
+              }}
+              </li>
+          {% endfor %}
+          </ul>
+          <div class="clear"></div>
+			</td>
+	  </tr>
+  
+  
+  	<tr>
+        <td class="item-left" >
+				  <a name="badges"></a>
+			  	{% trans counter=total_awards %}
+			  	{{counter}} Badge{% pluralize %}{{counter}} Badges
+			  	{% endtrans %}
+			</td>
+			<td class="item-right">
+	      <table>
+	          <tr>
+	              <td style="line-height:35px">
+	                  {% for badge in badges %}
+	                      <a href="{{badge.get_absolute_url()}}" title="{% trans description=badge.description %}{{description}}{% endtrans %}" class="medal">
+	                      	<span class="{{ badge.css_class }}">&#9679;</span>
+	                      	&nbsp;{% trans name=badge.name %}{{name}}{% endtrans %}
+                      	</a>
+	                      <span class="tag-number"> &#215; {{ awarded_badge_counts[badge.id]|intcomma }}</span>
+	                      {% if loop.index is divisibleby 3 %}
+	                          </td></tr>
+	                          <tr><td style="line-height:35px">
+	                      {% endif %}
+	                  {% endfor %}
+	              </td>
+	          </tr>
+	      </table>
+		  </td>
+	  </tr>
+  </table>
+{% endblock %}<!-- end user_stats.html -->

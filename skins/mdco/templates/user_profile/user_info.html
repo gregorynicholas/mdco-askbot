@@ -1,0 +1,114 @@
+{% extends "user_profile/user.html" %}
+{% import "macros.html" as macros %}
+<!-- user_info.html -->
+
+{% block profilesection %}
+    overview
+{% endblock %}
+
+{% block usercontent %}
+	{% if request.user == view_user %}
+		<div style="margin:0 0 10px 0;">
+		  <a style="text-decoration:underline;" href="{% url edit_user view_user.id %}">update profile</a>
+		  {% if request.user == view_user and settings.ALLOW_ADD_REMOVE_LOGIN_METHODS %}
+		      <a style="margin-left:20px; text-decoration:underline;" href="{{ settings.LOGIN_URL }}?next={{ settings.LOGIN_URL }}">manage login methods</a>
+		  {% endif %}
+		  </div>
+	{% endif %}
+	<style type="text/css">
+	.user-details {
+	  margin: 10px 0;
+	  font-size: 12px;
+	}
+	.user-details .item-left {
+		height: 25px;
+		line-height:25px;
+	  color: #444;
+	  background: #f0f0f0;
+	  padding:0 5px;
+	  white-space: nowrap;
+	}
+	.user-details .item-right {
+		height: 25px;
+		line-height:25px;
+	  color: #666;
+	  background: #f9f9f9;
+	  padding-left:5px;
+	  padding-right:12px;
+	  white-space: nowrap;
+	}
+	.user-about {
+	    
+	}
+	</style>
+	<table class="user-info-table">
+	    <tr>
+        <td style="width:200px;">
+            <div class="avatar">
+                {{ macros.gravatar(view_user, 128) }}
+                {% if request.user == view_user %}
+                    <div style="">
+                    	<a style="font-size:10px; text-decoration:underline;" {% if support_custom_avatars %}href="{% url avatar_change %}"{% else %}href="{% url faq %}#gravatar"{% endif %}>
+                    		change picture
+                    	</a>
+                    </div>
+                    {% if support_custom_avatars %}
+	                    <div style="">
+	                    	<a style="font-size:10px; text-decoration:underline;" href="{% url avatar_delete %}">remove</a>
+	                    </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <table class="user-details">
+		        	<tr>
+		              <td class="item-left">karma</td>
+		              <td class="item-right">{{view_user.reputation|intcomma}}</td>
+		          </tr>
+		        	<tr>
+		              <td class="item-left">status</td>
+		              <td class="item-right">{{user_status_for_display}}</td>
+		          </tr>
+		        	{% if view_user.real_name %}
+		          <tr>
+		              <td class="item-left">name</td>
+		              <td class="item-right">{{view_user.real_name}}</td>
+		          </tr>
+		          {% endif %}
+		          <tr>
+                  <td class="item-left">joined</td>
+                  <td class="item-right">{{ view_user.date_joined|diff_date }}</td>
+              </tr>
+              {% if view_user.last_seen %}
+	              <tr>
+	                  <td class="item-left">last seen</td>
+	                  <td class="item-right">{{view_user.last_seen|diff_date}}</strong></td>
+	              </tr>
+              {% endif %}
+              {% if view_user.website %}
+	              <tr>
+	                  <td class="item-left">website</td>
+	                  <td class="item-right">{{ macros.user_website_link(view_user, max_display_length = 30) }}</td>
+	              </tr>
+              {% endif  %}
+              {% if view_user.location or view_user.country %}
+	              <tr>
+	                  <td class="item-left">location</td>
+	                  <td class="item-right">{{ macros.user_full_location(view_user) }}</td>
+	              </tr>
+              {% endif %}
+          </table>
+        </td>
+        <td style="width:600px; padding-left:20px;">
+        	{% if user_follow_feature_on %}
+              {{ macros.follow_user_toggle(visitor = request.user, subject = view_user) }}
+          {% endif %}
+          {% if view_user.about %}
+          	<div class="user-about">
+              {{view_user.about|linebreaks}}
+          	</div>
+          {% endif %}
+          {% block userstatstable %}{% endblock %}
+        </td>
+	    </tr>
+	</table>
+{% endblock %}<!-- end user_info.html -->
