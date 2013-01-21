@@ -209,7 +209,7 @@ AUTHENTICATION_BACKENDS = (
   'askbot.deps.django_authopenid.backends.AuthBackend',
 )
 
-LOG_FILENAME = 'askbot.log'gitig
+LOG_FILENAME = 'askbot.log'
 logging.basicConfig(
   filename=os.path.join(PROJECT_ROOT, 'log', LOG_FILENAME),
   level=logging.CRITICAL,
