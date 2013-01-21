@@ -1,14 +1,14 @@
 ## Django settings for ASKBOT enabled project.
-import os.path
-import logging
+from os import path
 import sys
 import askbot
 import secrets
+import logging
 
 # this line is added so that we can import pre-packaged askbot
 # dependencies..
-sys.path.append(os.path.join(
-  os.path.dirname(askbot.__file__), 'deps'))
+sys.path.append(path.join(
+  path.dirname(askbot.__file__), 'deps'))
 
 # to debug Jinja2 templates set DEBUG=True and TEMPLATE_DEBUG=False.
 # it's strange, but this combination of settings makes the errors in templates
@@ -85,11 +85,11 @@ SITE_ID = secrets.site_id
 USE_I18N = True
 LANGUAGE_CODE = 'en'
 
-PROJECT_ROOT = os.path.dirname(__file__)
+PROJECT_ROOT = path.dirname(__file__)
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-ASKBOT_FILE_UPLOAD_DIR = os.path.join(
-  PROJECT_ROOT, 'askbot', 'upfiles')
+ASKBOT_FILE_UPLOAD_DIR = path.join(
+  PROJECT_ROOT, 'upfiles')
 
 # URL prefix for admin media.
 # CSS, JavaScript and images. Make sure to use a trailing slash.
@@ -127,8 +127,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 
-ROOT_URLCONF = os.path.basename(PROJECT_ROOT) + '.urls'
-FILE_UPLOAD_TEMP_DIR = os.path.join(PROJECT_ROOT, 'tmp'
+ROOT_URLCONF = path.basename(PROJECT_ROOT) + '.urls'
+FILE_UPLOAD_TEMP_DIR = path.join(PROJECT_ROOT, 'tmp'
   ).replace('\\','/')
 
 FILE_UPLOAD_HANDLERS = (
@@ -147,8 +147,8 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # absolute path to your private skin collection.
 # see: http://askbot.org/en/question/207/
-ASKBOT_EXTRA_SKIN_DIR = os.path.join(
-  PROJECT_ROOT, 'askbot', 'skins')
+ASKBOT_EXTRA_SKIN_DIR = path.join(
+  PROJECT_ROOT, 'skins')
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -211,7 +211,7 @@ AUTHENTICATION_BACKENDS = (
 
 LOG_FILENAME = 'askbot.log'
 logging.basicConfig(
-  filename=os.path.join(PROJECT_ROOT, 'log', LOG_FILENAME),
+  filename=path.join(PROJECT_ROOT, 'log', LOG_FILENAME),
   level=logging.CRITICAL,
   format='%(pathname)s TIME: %(asctime)s MSG: %(filename)s:%(funcName)s:%(lineno)d %(message)s',
 )
