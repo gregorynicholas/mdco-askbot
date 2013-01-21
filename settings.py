@@ -147,7 +147,8 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # absolute path to your private skin collection.
 # see: http://askbot.org/en/question/207/
-# ASKBOT_EXTRA_SKIN_DIR =
+ASKBOT_EXTRA_SKIN_DIR = os.path.join(
+  PROJECT_ROOT, 'askbot', 'skins')
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -208,7 +209,7 @@ AUTHENTICATION_BACKENDS = (
   'askbot.deps.django_authopenid.backends.AuthBackend',
 )
 
-LOG_FILENAME = 'askbot.log'
+LOG_FILENAME = 'askbot.log'gitig
 logging.basicConfig(
   filename=os.path.join(PROJECT_ROOT, 'log', LOG_FILENAME),
   level=logging.CRITICAL,
