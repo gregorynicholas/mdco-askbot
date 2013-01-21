@@ -48,5 +48,5 @@ askbot/cron/
 askbot/doc/
 askbot/upfiles/
 logs/
-
+http.conf
 
