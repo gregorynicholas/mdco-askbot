@@ -1227,7 +1227,7 @@ div.comments {
   padding-left:3px;
 }
 
-.form-row input {
+.form-row input:not([type=submit]) {
   width:180px;
   display:inline-block;
   padding: 5px 0 0 5px;
