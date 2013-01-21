@@ -8,36 +8,33 @@
       	<div class="application-logo">
         	<img src="/m/default/media/images/medco-logo-270x50.png" />
         </div>
-        <div class="application-title">
-        	Global Health Sciences Center
-        </div>
         <div id="ab-main-nav">
-            <a 
+            <a
                 id="nav_questions"
                 href="{% url questions %}"
                 {% if active_tab == 'questions' %}class="on"{% endif %}
             >{% trans %}questions{% endtrans %}</a>
-            <a 
+            <a
                 id="nav_tags"
                 href="{% url tags %}"
                 {% if active_tab == 'tags' %}class="on"{% endif %}
             >{% trans %}tags{% endtrans %}</a>
-            {#% <a 
+            {#% <a
                 id="nav_users"
                 href="{% url users %}"
                 {% if active_tab == 'users' %}class="on"{% endif %}
             >{% trans %}users{% endtrans %}</a>
-            <a 
+            <a
                 id="nav_badges"
                 href="{% url badges %}"
                 {% if active_tab == 'badges' %}class="on"{% endif %}
             >{% trans %}badges{% endtrans %}</a> %#}
-            <a 
+            <a
                 id="nav_ask"
                 href="{% url ask %}"
                 class="{% if active_tab == 'ask' %}on{% else %}special{% endif %}"
             >{% trans %}ask a question{% endtrans %}</a>
-            
+
             <!--
             <div id="LiveChat_1310743928" style="display:inline; text-transform:lowercase;">
             	<a href="http://www.livechatinc.com/?partner=lc_1057437">
@@ -59,9 +56,9 @@
 							});
 						</script>
             -->
-            
+
         </div>
-        
+
         <div id="LiveChat_1310744143" style="position:absolute; right:10px; top:50px;">
         	<a href="http://www.livechatinc.com/?partner=lc_1057437"></a>
       	</div>

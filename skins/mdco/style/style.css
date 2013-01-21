@@ -86,7 +86,7 @@ h1 {
     margin: 0;
 }
 
-.users-page h1, 
+.users-page h1,
 .tags-page h1 {
     float: left;
 }
@@ -169,7 +169,7 @@ blockquote {
 }
 
 #ab-header .content-wrapper {
-    height: 132px;/* same as logo height */
+    height: 118px; /* same as logo height */
 }
 
 #CALeft {
@@ -202,7 +202,7 @@ blockquote {
 	position: absolute;
 	width:324px;
 	height:50px;
-	top:16px;
+	top: 14px;
 	left: 20px;
 }
 
@@ -266,7 +266,7 @@ blockquote {
 #ab-main-nav a {
     color: #555;
     background-color: #eee;
-    
+
     border: 1px solid #ccc;
     border-bottom: none;
     border-top-left-radius: 4px;
@@ -275,7 +275,7 @@ blockquote {
     -webkit-border-top-right-radius: 4px;
     -moz-border-radius-topleft: 4px;
     -moz-border-radius-topright: 4px;
-    
+
     padding: 0px 12px 3px 12px;
     height: 25px;
     line-height: 30px;
@@ -312,14 +312,14 @@ blockquote {
     background-color: #f7f7f7;
     width:700px;
     padding: 7px;
-    
+
     border: 1px solid #ccc;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
 }
 
-#searchBar .searchInput, 
+#searchBar .searchInput,
 #searchBar .searchInputCancelable {
     font-size: 24px;
     line-height: 24px;
@@ -347,7 +347,7 @@ blockquote {
     text-align: center;
     padding-bottom: 4px;
     cursor: pointer;
-    
+
     border: 1px solid #ccc;
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -375,7 +375,7 @@ blockquote {
     display:inline-block;
     background-color: #f7f7f7;
     padding: 7px;
-    
+
     border: 1px solid #ccc;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -482,7 +482,7 @@ ul#related-tags li {
     clear: left;
 }
 
-/* .tag-left and .tag-right are for 
+/* .tag-left and .tag-right are for
 		the sliding doors decoration of tags */
 .tag-left {
     background: url(../images/tag-left.png) no-repeat left center;
@@ -611,8 +611,8 @@ ul#search-tags {
     /*padding:0px 5px;*/
     font-size: 17px;
     font-weight: 800;
-    
-    border:1px solid #cccccc; 
+
+    border:1px solid #cccccc;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -666,7 +666,7 @@ ul#search-tags {
     padding: 5px 0 0 5px;
     float: right;
     cursor: default;
-    
+
     border-radius: 5px;
     -moz-border-radius: 5px;
     -khtml-border-radius: 5px;
@@ -687,7 +687,7 @@ ul#search-tags {
     border-spacing: 0px;
 }
 
-.answer-table {	
+.answer-table {
     border-bottom: 1px solid #bbb;
     clear: both;
 }
@@ -746,9 +746,9 @@ ul#search-tags {
     cursor: default;
 }
 
-.paginator .prev a, 
+.paginator .prev a,
 .paginator .prev a:visited,
-.paginator .next a, 
+.paginator .next a,
 .paginator .next a:visited {
     border: 1px solid #fff;
     background-color: #fff;
@@ -765,8 +765,8 @@ ul#search-tags {
     margin-left: .5em;
 }
 
-.paginator .page a, 
-.paginator .page a:visited, 
+.paginator .page a,
+.paginator .page a:visited,
 .paginator .curr {
     padding: 3px 6px 2px 6px;
     font-weight: normal;
@@ -845,7 +845,7 @@ a:hover.medal {
 	height:15px;
 }
 
-.tabsA, 
+.tabsA,
 .tabsC {
     position: relative;
     display: block;
@@ -857,15 +857,15 @@ a:hover.medal {
 .tabsA { float: right; }
 .tabsC { float: left; }
 
-.tabsA a, 
+.tabsA a,
 .tabsC a{
     background: #f7f7f7;
-    
+
     border: 1px solid #eeeeec;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    
+
     color: #888a85;
     display: block;
     float: left;
@@ -877,22 +877,22 @@ a:hover.medal {
     font-size: 12px;
 }
 
-.tabsA a.on, 
-.tabsC a.on, 
-.tabsA a:hover, 
+.tabsA a.on,
+.tabsC a.on,
+.tabsA a:hover,
 .tabsC a:hover {
     background: #e7e7e7;
     color: #555;
     border: 1px solid #ccc;
 }
 
-.tabsA a.rev.on, 
+.tabsA a.rev.on,
 .tabsA a.rev.on:hover {
    padding: 0px 2px 0px 7px;
 }
 
 
-.tabsA .label, 
+.tabsA .label,
 .tabsC .label {
     float: left;
     font-size: 11px;
@@ -1718,12 +1718,12 @@ a.offensive {
     background-color: #f7f7f7;
     color: #777;
     font-size: 12px;
-    
+
     border: 1px solid #ccc;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    
+
 }
 
 .message h1 {
@@ -1760,7 +1760,7 @@ button::-moz-focus-inner {
     font-size: 20px;
     text-align: center;
     padding-bottom: 4px;
-    
+
     border: 1px solid #ccc;
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1989,7 +1989,7 @@ ul.form-horizontal-rows li input {
     float: left;
 }
 
-.post-controls, 
+.post-controls,
 .post-tags {
     font-size: 11px;
     line-height: 12px;
@@ -2033,7 +2033,7 @@ ul.post-retag {
     margin-bottom: 6px;
     line-height: 14px;
     color: #777;
-    
+
 }
 .post-update-info a {
 	color: inherit;
