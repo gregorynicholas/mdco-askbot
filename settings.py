@@ -3,6 +3,7 @@ import os.path
 import logging
 import sys
 import askbot
+import secrets
 
 # this line is added so that we can import pre-packaged askbot
 # dependencies..
@@ -14,36 +15,34 @@ sys.path.append(os.path.join(
 # trigger debugging output.
 DEBUG = True
 TEMPLATE_DEBUG = False
-INTERNAL_IPS = ('127.0.0.1',)
-ADMINS = (
-  ('The Medicines Company', 'medical.information@themedco.com'),
-)
+INTERNAL_IPS = secrets.internal_ips
+ADMINS = secrets.admins
 MANAGERS = ADMINS
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'askbot',
-    'USER': 'sa',
-    'PASSWORD': 'sa',
-    'HOST': '',
-    'PORT': ''
+    'ENGINE': secrets.db_engine,
+    'NAME': secrets.db_name,
+    'USER': secrets.db_user,
+    'PASSWORD': secrets.db_pass,
+    'HOST': secrets.db_host,
+    'PORT': secrets.db_port
   }
 }
 
 # only postgres (>8.3) and mysql are supported so far others have
 # not been tested yet..
-DATABASE_ENGINE = 'django.db.backends.mysql'
+DATABASE_ENGINE = secrets.db_engine
 # Or path to database file if using sqlite3.
-DATABASE_NAME = 'askbot'
+DATABASE_NAME = secrets.db_name
 # # Not used with sqlite3.
-DATABASE_USER = 'sa'
+DATABASE_USER = secrets.db_user
 # Not used with sqlite3.
-DATABASE_PASSWORD = 'sa'
+DATABASE_PASSWORD = secrets.db_pass
 # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_HOST = ''
+DATABASE_HOST = secrets.db_host
 # Set to empty string for default. Not used with sqlite3.
-DATABASE_PORT = ''
+DATABASE_PORT = secrets.db_port
 
 #outgoing mail server settings
 SERVER_EMAIL = ''
@@ -51,9 +50,9 @@ DEFAULT_FROM_EMAIL = ''
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_SUBJECT_PREFIX = ''
-EMAIL_HOST=''
-EMAIL_PORT=''
-EMAIL_USE_TLS=False
+EMAIL_HOST = ''
+EMAIL_PORT = ''
+EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # incoming mail settings
@@ -79,7 +78,7 @@ IMAP_USE_TLS = False
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/New_York'
-SITE_ID = 1
+SITE_ID = secrets.site_id
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -97,7 +96,7 @@ ASKBOT_FILE_UPLOAD_DIR = os.path.join(
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/admin/media/'
 # Make up some unique string, and don't share it with anybody.
-SECRET_KEY = '6n73-E$dD-*76^-SF!S-3358-X^zz-00oP-3*Bb'
+SECRET_KEY = secrets.key
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -216,11 +215,12 @@ logging.basicConfig(
   format='%(pathname)s TIME: %(asctime)s MSG: %(filename)s:%(funcName)s:%(lineno)d %(message)s',
 )
 
-# this will allow running your forum with url like http://site.com/forum
+# this will allow running your forum with url like http://site.com/forum..
+# no leading slash, default = '' empty string.
 # ASKBOT_URL = 'forum/'
-ASKBOT_URL = '' #no leading slash, default = '' empty string
+ASKBOT_URL = ''
 _ = lambda v:v #fake translation function for the login url
-LOGIN_URL = '/%s%s%s' % (ASKBOT_URL,_('account/'),_('signin/'))
+LOGIN_URL = '/%s%s%s' % (ASKBOT_URL, _('account/'), _('signin/'))
 # note - it is important that upload dir url is NOT translated!!!
 # also, this url must not have the leading slash
 ASKBOT_UPLOADED_FILES_URL = '%s%s' % (ASKBOT_URL, 'upfiles/')
@@ -231,7 +231,6 @@ ASKBOT_USE_STACKEXCHANGE_URLS = False
 # celery Settings
 BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 CELERY_ALWAYS_EAGER = True
-
 import djcelery
 djcelery.setup_loader()
 
