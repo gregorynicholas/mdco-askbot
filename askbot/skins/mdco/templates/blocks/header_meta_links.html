@@ -1,0 +1,23 @@
+{% if request.user.is_authenticated() %}
+    <a href="{{ request.user.get_absolute_url() }}">{{ request.user.username }}</a> 
+    <span class="user-info">
+	    {{ macros.inbox_link(request.user) }}
+	    {{ macros.moderation_items_link(request.user, moderation_items) }}
+	    <!--({{ macros.user_long_score_and_badge_summary(user) }})-->
+    </span>
+    <a href="{{ settings.LOGOUT_URL }}?next={{ settings.LOGOUT_REDIRECT_URL }}">{% trans %}logout{% endtrans %}</a>
+{% else %}
+    <a href="{{ settings.LOGIN_URL }}">sign in</a>
+    {% if settings.USE_LDAP_FOR_PASSWORD_LOGIN == False %}
+    	<a class="create-password-account" 
+    		 href="{% url user_signup_with_password %}?login_provider=local">
+    		 	create an account
+		 	</a>
+    {% endif %}
+{% endif %}
+
+{% if request.user.is_authenticated() and request.user.is_administrator() %}
+		<a href="{#% url users %#}http://global.themedco.com/admin/auth/user/">users</a>
+    <a href="{% url site_settings %}">settings</a>
+    <a href="{#% url site_admin %#}/admin/">admin</a>
+{% endif %}
